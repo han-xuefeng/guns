@@ -8,6 +8,7 @@ import com.stylefeng.guns.api.user.UserModel;
 import com.stylefeng.guns.core.util.MD5Util;
 import com.stylefeng.guns.rest.common.persistence.dao.MoocUserTMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MoocUserT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Service(interfaceClass = UserAPI.class)
 public class UserServiceImpl implements UserAPI {
 
+    @Autowired
     private MoocUserTMapper moocUserTMapper;
 
     @Override
@@ -64,6 +66,7 @@ public class UserServiceImpl implements UserAPI {
         EntityWrapper<MoocUserT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("user_name",username);
         Integer result = moocUserTMapper.selectCount(entityWrapper);
+        System.out.println(result);
         if(result != null && result >0){
             return false;
         }else {
