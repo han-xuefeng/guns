@@ -31,7 +31,7 @@ public class AuthController {
 //    @Resource(name = "simpleValidator")
 //    private IReqValidator reqValidator;
 
-    @Reference(interfaceClass = UserAPI.class)
+    @Reference(interfaceClass = UserAPI.class,check = false)
     private UserAPI userAPI;
 
     @RequestMapping(value = "${jwt.auth-path}")
@@ -39,7 +39,7 @@ public class AuthController {
 
         boolean validate = true;
         //去掉guns 自带的用户名密码验证机制
-        int userId = 3;//userAPI.login(authRequest.getUserName(),authRequest.getPassword());
+        int userId = userAPI.login(authRequest.getUserName(),authRequest.getPassword());
         if(userId == 0){
             validate = false;
         }

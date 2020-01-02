@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserAPI {
 
     @Override
     public boolean checkUsername(String username) {
-        System.out.println(username+"###");
         EntityWrapper<MoocUserT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("user_name",username);
         Integer result = moocUserTMapper.selectCount(entityWrapper);
@@ -111,27 +110,43 @@ public class UserServiceImpl implements UserAPI {
     @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
         //将传入的数据转换为MoocUserT
+//        MoocUserT moocUserT = new MoocUserT();
+//        moocUserT.setUuid(userInfoModel.getUuid());
+//        moocUserT.setNickName(userInfoModel.getNickname());
+//        moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
+//        moocUserT.setBirthday(userInfoModel.getBirthday());
+//        moocUserT.setBiography(userInfoModel.getBiography());
+//        moocUserT.setBeginTime(time2Date(userInfoModel.getBeginTime()));
+//        moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
+//        moocUserT.setEmail(userInfoModel.getEmail());
+//        moocUserT.setAddress(userInfoModel.getAddress());
+//        moocUserT.setUserPhone(userInfoModel.getPhone());
+//        moocUserT.setUserSex(userInfoModel.getSex());
+//        moocUserT.setUpdateTime(time2Date(System.currentTimeMillis()));
+
         MoocUserT moocUserT = new MoocUserT();
         moocUserT.setUuid(userInfoModel.getUuid());
-        moocUserT.setUserName(userInfoModel.getNickname());
+        moocUserT.setNickName(userInfoModel.getNickname());
         moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
         moocUserT.setBirthday(userInfoModel.getBirthday());
         moocUserT.setBiography(userInfoModel.getBiography());
-        moocUserT.setBeginTime(time2Date(userInfoModel.getBeginTime()));
+        moocUserT.setBeginTime(null);
         moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
         moocUserT.setEmail(userInfoModel.getEmail());
         moocUserT.setAddress(userInfoModel.getAddress());
         moocUserT.setUserPhone(userInfoModel.getPhone());
         moocUserT.setUserSex(userInfoModel.getSex());
-        moocUserT.setUpdateTime(time2Date(System.currentTimeMillis()));
+        moocUserT.setUpdateTime(null);
 
-        //将数据存入到数据库
-        Integer isSuccess = moocUserTMapper.updateById(moocUserT);
-        if(isSuccess >0 ){
-            //按照id把用户查处来
+        // DO存入数据库
+        Integer integer = moocUserTMapper.updateById(moocUserT);
+        if(integer>0){
+            // 将数据从数据库中读取出来
             UserInfoModel userInfo = getUserInfo(moocUserT.getUuid());
+            // 将结果返回给前端
             return userInfo;
+        }else{
+            return null;
         }
-        return null;
     }
 }

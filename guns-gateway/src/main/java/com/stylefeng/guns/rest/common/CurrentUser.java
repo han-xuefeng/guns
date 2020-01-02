@@ -1,6 +1,5 @@
 package com.stylefeng.guns.rest.common;
 
-import com.stylefeng.guns.api.user.UserInfoModel;
 
 public class CurrentUser {
 
@@ -14,15 +13,5 @@ public class CurrentUser {
     public static String getCurrentUser(){
         return threadLocal.get();
     }
-
-//    //将用户信息放入存储空间
-//    public static void saveUserInfo(UserInfoModel userInfoModel){
-//        threadLocal.set(userInfoModel);
-//    }
-//    //将用户信息取出
-//    public static UserInfoModel getCurrentUser(){
-//        return threadLocal.get();
-//    }
-
 
 }

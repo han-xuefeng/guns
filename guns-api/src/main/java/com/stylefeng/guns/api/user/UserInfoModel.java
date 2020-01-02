@@ -1,8 +1,10 @@
 package com.stylefeng.guns.api.user;
 
 
-public class UserInfoModel {
+import java.io.Serializable;
 
+public class UserInfoModel implements Serializable {
+    private Integer uuid;
     private String username;
     private String nickname;
     private String email;
@@ -16,7 +18,6 @@ public class UserInfoModel {
     private Long beginTime;
     private Long updateTime;
 
-    private Integer uuid;
 
     public Integer getUuid() {
         return uuid;

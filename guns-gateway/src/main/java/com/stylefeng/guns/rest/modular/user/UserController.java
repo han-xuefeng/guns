@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user/")
 public class UserController {
 
-    @Reference(interfaceClass = UserAPI.class)
+    @Reference(interfaceClass = UserAPI.class,check = false)
     private UserAPI userAPI;
 
     @RequestMapping("register")
@@ -36,7 +36,6 @@ public class UserController {
     @RequestMapping(value = "check",method = RequestMethod.POST)
     public ResponseVO check(String username){
         if(username != null && username.trim().length()>0){
-            System.out.println(username);
             boolean notExist = userAPI.checkUsername(username);
             if(notExist){
                 return ResponseVO.success("用户用不存在");
@@ -81,7 +80,7 @@ public class UserController {
         return ResponseVO.serviceFail("当前用户没有登录");
     }
 
-    @RequestMapping(value = "updateUserInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
     public ResponseVO updateUserInfo(UserInfoModel userInfoModel){
         //获取当前用户信息
         String userId = CurrentUser.getCurrentUser();
@@ -91,6 +90,7 @@ public class UserController {
             if(uuid != userInfoModel.getUuid()){
                 return ResponseVO.serviceFail("非法操作");
             }
+            System.out.println(uuid);
             UserInfoModel userInfo = userAPI.updateUserInfo(userInfoModel);
             if(userInfo != null){
                 return ResponseVO.success(userInfo);
