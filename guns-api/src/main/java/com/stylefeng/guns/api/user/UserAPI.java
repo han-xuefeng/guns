@@ -1,5 +1,8 @@
 package com.stylefeng.guns.api.user;
 
+import com.stylefeng.guns.api.user.vo.UserInfoModel;
+import com.stylefeng.guns.api.user.vo.UserModel;
+
 public interface UserAPI {
 
     int login(String username, String password);

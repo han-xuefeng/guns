@@ -5,10 +5,10 @@ rest:
 jwt:
   header: Authorization   #http请求头所需要的字段
   secret: mySecret        #jwt秘钥
-  expiration: 604800      #7天 单位:秒
+  expiration: 60      #7天 单位:秒
   auth-path: auth         #认证请求的路径
   md5-key: randomKey      #md5加密混淆key
-  ignore-url: /user/register,/user/check #忽略列表
+  ignore-url: /user/register,/user/check,/film/getIndex,/film/getConditionList,/film/getFilms,/film/films #忽略列表
 
 server:
   port: 80 #项目端口
